@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSystem.Web", "TicketingSystem.Web\TicketingSystem.Web.csproj", "{33CB43E3-F0AF-4A53-BF96-EF5A76060383}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSystem.Entities", "TicketingSystem.Entities\TicketingSystem.Entities.csproj", "{179DA85A-2CA0-47B7-BBBB-1780F6ECC926}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{33CB43E3-F0AF-4A53-BF96-EF5A76060383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33CB43E3-F0AF-4A53-BF96-EF5A76060383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33CB43E3-F0AF-4A53-BF96-EF5A76060383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{179DA85A-2CA0-47B7-BBBB-1780F6ECC926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179DA85A-2CA0-47B7-BBBB-1780F6ECC926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179DA85A-2CA0-47B7-BBBB-1780F6ECC926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179DA85A-2CA0-47B7-BBBB-1780F6ECC926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

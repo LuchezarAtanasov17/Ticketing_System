@@ -12,7 +12,7 @@ using TicketingSystem.Entities.Data;
 namespace TicketingSystem.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230706132922_Initial")]
+    [Migration("20230706133157_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
