@@ -12,7 +12,7 @@ using TicketingSystem.Entities.Data;
 namespace TicketingSystem.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230706133157_Initial")]
+    [Migration("20230707182827_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,25 @@ namespace TicketingSystem.Entities.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0c1b871b-4ed5-4299-aec4-d59054b07c54"),
+                            Description = "Luchezar's project for SoftUni.",
+                            Name = "LAAuto"
+                        },
+                        new
+                        {
+                            Id = new Guid("83da1e75-3b7d-4a37-a33d-ba8cf149acb8"),
+                            Description = "Shows weather analysis.",
+                            Name = "Weather forecasting system"
+                        },
+                        new
+                        {
+                            Id = new Guid("8c97398e-09d8-4823-a82d-343619758e81"),
+                            Name = "Instagram"
+                        });
                 });
 
             modelBuilder.Entity("TicketingSystem.Entities.Models.Role", b =>
@@ -212,6 +231,29 @@ namespace TicketingSystem.Entities.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04"),
+                            ConcurrencyStamp = "bdea90a1-4ea6-4db7-acc6-c5dd6a18bb07",
+                            Name = "User",
+                            NormalizedName = "USER  "
+                        },
+                        new
+                        {
+                            Id = new Guid("6c508509-7dd9-44c3-9597-8c14c65e661b"),
+                            ConcurrencyStamp = "b6d65614-7c33-46b0-aecc-ebe78d0f9d7d",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = new Guid("0378ef66-3332-4860-ad38-773ed8c0594a"),
+                            ConcurrencyStamp = "b832276f-ec40-4348-95c3-a49808529b84",
+                            Name = "Мaintenance",
+                            NormalizedName = "МAINTENANCE"
+                        });
                 });
 
             modelBuilder.Entity("TicketingSystem.Entities.Models.Ticket", b =>
@@ -254,6 +296,41 @@ namespace TicketingSystem.Entities.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Tickets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ad90a67e-02be-4f9a-9fa8-74d5abcc2b4b"),
+                            Description = "The app doesn't recognize my identity, when I try to log in.",
+                            ProjectId = new Guid("8c97398e-09d8-4823-a82d-343619758e81"),
+                            ReleaseDate = new DateTime(2022, 4, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SenderId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
+                            State = 0,
+                            Title = "Login issue.",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("543ff3e3-5ac4-45ca-8cd4-f8d942548c7e"),
+                            Description = "I need help with finding my login activity.",
+                            ProjectId = new Guid("8c97398e-09d8-4823-a82d-343619758e81"),
+                            ReleaseDate = new DateTime(2023, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SenderId = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
+                            State = 1,
+                            Title = "Help for account activity.",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("d385bf53-6e41-4ea3-8c7f-729c6893466f"),
+                            Description = "It would be nice, when deleting any kind of data, a window to pop up for reassurance of my action.",
+                            ProjectId = new Guid("0c1b871b-4ed5-4299-aec4-d59054b07c54"),
+                            ReleaseDate = new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SenderId = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
+                            State = 1,
+                            Title = "A user-friendly request.",
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("TicketingSystem.Entities.Models.User", b =>
@@ -330,6 +407,40 @@ namespace TicketingSystem.Entities.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cf5e9e7d-4faf-492d-897c-56e747d38746",
+                            Email = "user@mail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Ivan",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@MAIL.COM",
+                            NormalizedUserName = "USER",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "26c3e852-7746-458b-aebb-59aaee789224",
+                            Email = "user2@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Georgi",
+                            LastName = "Georgiev",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER2@GMAIL.COM",
+                            NormalizedUserName = "USER2",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "User2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

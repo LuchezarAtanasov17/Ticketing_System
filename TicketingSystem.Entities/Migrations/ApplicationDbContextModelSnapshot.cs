@@ -236,7 +236,7 @@ namespace TicketingSystem.Entities.Migrations
                             Id = new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04"),
                             ConcurrencyStamp = "bdea90a1-4ea6-4db7-acc6-c5dd6a18bb07",
                             Name = "User",
-                            NormalizedName = "NAME"
+                            NormalizedName = "USER  "
                         },
                         new
                         {
@@ -411,7 +411,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d2e0f5c-4ef8-46b9-951d-34c1cc129034",
+                            ConcurrencyStamp = "96fb727c-a842-4642-8b6a-f431dcd2ea01",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -427,7 +427,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "69c70b23-b9d7-4a99-8ec9-4deb4e60a30c",
+                            ConcurrencyStamp = "b1eba4cf-27e0-4fc7-ba5d-d964c00d3387",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",

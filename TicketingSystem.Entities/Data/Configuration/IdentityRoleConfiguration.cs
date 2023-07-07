@@ -24,7 +24,7 @@ namespace TicketingSystem.Entities.Data.Configuration
             {
                 Id = Guid.Parse("7062d4a3-203f-4375-aaef-4918dcfcef04"),
                 Name = "User",
-                NormalizedName = "Name".ToUpper(),
+                NormalizedName = "User  ".ToUpper(),
                 ConcurrencyStamp = "bdea90a1-4ea6-4db7-acc6-c5dd6a18bb07"
             };
             roles.Add(role);

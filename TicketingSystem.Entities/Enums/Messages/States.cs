@@ -8,7 +8,7 @@ namespace TicketingSystem.Entities.Enums.Messages
 {
     public enum States
     {
-        Draft,
-        Published
+        Draft = 1,
+        Published = 2,
     }
 }

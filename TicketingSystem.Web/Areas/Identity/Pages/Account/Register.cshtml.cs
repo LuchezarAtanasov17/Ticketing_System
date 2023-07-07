@@ -98,6 +98,21 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "User name")]
+            [StringLength(30)]
+            public string UserName { get; set; }
+
+            [Required]
+            [Display(Name = "First name")]
+            [StringLength(30)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last name")]
+            [StringLength(30)]
+            public string LastName { get; set; }
         }
 
 
@@ -115,12 +130,27 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.UserName = Input.UserName;
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+                    // Two default users are already seeded, so the first real registered user will acquire Administrator privileges.
+                    if (_userManager.Users.Count() < 4)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Administrator");
+                    }
+                    // All other users will take User role.
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
