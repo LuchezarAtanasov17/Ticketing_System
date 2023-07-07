@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TicketingSystem.Entities.Models;
+﻿using TicketingSystem.Web.Models.Tickets;
 
-namespace TicketingSystem.Web.Models
+namespace TicketingSystem.Web.Models.Projects
 {
     public class ProjectViewModel
     {
@@ -11,6 +10,6 @@ namespace TicketingSystem.Web.Models
 
         public string? Description { get; set; }
 
-        public ICollection<Ticket> Tickets { get; set; }
+        public ICollection<TicketViewModel> Tickets { get; set; }
     }
 }

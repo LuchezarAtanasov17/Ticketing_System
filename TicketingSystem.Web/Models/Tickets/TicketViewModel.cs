@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using TicketingSystem.Entities.Enums.Tickets;
-using TicketingSystem.Entities.Models;
+﻿using TicketingSystem.Entities.Enums.Tickets;
+using TicketingSystem.Web.Models.Messages;
+using TicketingSystem.Web.Models.Projects;
+using TicketingSystem.Web.Models.Users;
 
-namespace TicketingSystem.Web.Models
+namespace TicketingSystem.Web.Models.Tickets
 {
     public class TicketViewModel
     {
@@ -23,12 +23,12 @@ namespace TicketingSystem.Web.Models
 
         public States State { get; set; }
 
-        public User Sender { get; set; }
+        public UserViewModel Sender { get; set; }
 
-        public Project Project { get; set; }
+        public ProjectViewModel Project { get; set; }
 
         public byte[]? Files { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
+        public ICollection<MessageViewModel> Messages { get; set; }
     }
 }

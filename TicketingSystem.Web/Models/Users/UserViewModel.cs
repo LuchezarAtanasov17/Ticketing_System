@@ -1,4 +1,4 @@
-﻿namespace TicketingSystem.Web.Models
+﻿namespace TicketingSystem.Web.Models.Users
 {
     public class UserViewModel
     {

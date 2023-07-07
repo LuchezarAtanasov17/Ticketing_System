@@ -1,0 +1,46 @@
+﻿@using TicketingSystem.Web.Models.Tickets;
+
+@model TicketViewModel
+
+@{
+    ViewBag.Title = "Ticket Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Title</u></p>
+            <p>
+                Description:
+                <b>@Model.Description</b>
+            </p>
+            <p>
+                Release date:
+                <b>@Model.ReleaseDate</b>
+            </p>
+            <p>
+                State:
+                <b>@Model.State</b>
+            <p>
+                Type:
+                <b>@Model.Type</b>
+            </p>
+            <p>
+                Writer user name:
+                <b>@Model.Sender.UserName</b>
+            </p>
+            <p>
+                Email:
+                <b>@Model.Sender.Email</b>
+            </p>
+        </div>
+
+        <form class="ml-2" asp-controller="Ticket"
+              asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <input class="btn btn-danger" type="submit" value="Delete" />
+        </form>
+    </div>
+</div>

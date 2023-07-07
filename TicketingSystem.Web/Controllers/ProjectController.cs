@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Models;
-using TicketingSystem.Web.Models;
+using TicketingSystem.Web.Models.Projects;
 
 namespace TicketingSystem.Web.Controllers
 {
@@ -26,7 +26,6 @@ namespace TicketingSystem.Web.Controllers
                     Id= p.Id,
                     Name = p.Name,
                     Description= p.Description,
-                    Tickets = p.Tickets,
                 })
                 .ToListAsync();
 
