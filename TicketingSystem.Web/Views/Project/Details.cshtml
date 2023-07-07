@@ -1,0 +1,25 @@
+﻿@model ProjectViewModel
+
+@{
+    ViewBag.Title = "Project Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>
+                Description:
+                <b>@Model.Description</b>
+            </p>
+        </div>
+
+        <form class="ml-2" asp-controller="Ticket"
+              asp-action="Create" asp-route-id="@Model.Id" method="get">
+            <input class="btn btn-primary" type="submit" value="Make a request" />
+        </form>
+    </div>
+</div>

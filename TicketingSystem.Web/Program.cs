@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TicketingSystem.Entities.Data;
+using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddRoles<Role>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 
