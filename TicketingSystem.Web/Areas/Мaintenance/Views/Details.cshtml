@@ -1,0 +1,56 @@
+﻿@using System.Security.Claims;
+@using TicketingSystem.Web.Models.Tickets;
+
+@model TicketViewModel
+
+@{
+    ViewBag.Title = "Ticket Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Title</u></p>
+            <p>
+                Description:
+                <b>@Model.Description</b>
+            </p>
+            <p>
+                Release date:
+                <b>@Model.ReleaseDate</b>
+            </p>
+            <p>
+                State:
+                <b>@Model.State</b>
+            <p>
+                Type:
+                <b>@Model.Type</b>
+            </p>
+            <p>
+                Writer user name:
+                <b>@Model.Sender.UserName</b>
+            </p>
+            <p>
+                Email:
+                <b>@Model.Sender.Email</b>
+            </p>
+        </div>
+
+        @if (Model.SenderId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+        {
+            <a class="ml-2 btn btn-danger" asp-controller="Ticket" asp-action="DeleteMine"
+           asp-route-id="@Model.Id">Delete</a>
+        }
+        else
+        {
+            <a class="ml-2 btn btn-danger" asp-controller="Ticket" asp-action="Delete"
+           asp-route-id="@Model.Id">Delete</a>
+        }
+
+        <a class="btn btn-warning" asp-controller="Ticket" asp-action="Update"
+           asp-route-id="@Model.Id">Edit</a>
+    </div>
+</div>

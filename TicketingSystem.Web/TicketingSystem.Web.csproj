@@ -23,4 +23,8 @@
     <ProjectReference Include="..\TicketingSystem.Entities\TicketingSystem.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Views\" />
+  </ItemGroup>
+
 </Project>

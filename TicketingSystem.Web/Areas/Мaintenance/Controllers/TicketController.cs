@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Security.Claims;
 using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Enums.Tickets;
@@ -8,17 +9,46 @@ using TicketingSystem.Entities.Models;
 using TicketingSystem.Web.Models.Projects;
 using TicketingSystem.Web.Models.Tickets;
 using TicketingSystem.Web.Models.Users;
+using WEB = TicketingSystem.Web.Controllers;
 
-namespace TicketingSystem.Web.Controllers
+namespace TicketingSystem.Web.Areas.Мaintenance.Controllers
 {
-    [Authorize]
-    public class TicketController : Controller
+    public class TicketController : BaseController
     {
         private IRepository _repo;
 
-        public TicketController(IRepository repo)
+        public TicketController(IRepository repo) 
         {
             _repo = repo;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var tickets = await _repo.All<Ticket>()
+                .Select(p => new TicketViewModel()
+                {
+                    Id = p.Id,
+                    Description = p.Description,
+                    Type = p.Type,
+                    State = p.State,
+                    Title = p.Title,
+                    SenderId = p.SenderId,
+                    ProjectId = p.ProjectId,
+                    Files = p.Files,
+                    ReleaseDate = p.ReleaseDate,
+                    Sender = new UserViewModel()
+                    {
+                        UserName = p.Sender.UserName,
+                        Email = p.Sender.Email,
+                        Id = p.Id,
+                        FirstName = p.Sender.FirstName,
+                        LastName = p.Sender.LastName,
+                    }
+                })
+                .ToListAsync();
+
+            return View("List", tickets);
         }
 
         [HttpGet]
@@ -40,7 +70,7 @@ namespace TicketingSystem.Web.Controllers
                     {
                         UserName = p.Sender.UserName,
                         Email = p.Sender.Email,
-                        Id= p.Id,
+                        Id = p.Id,
                         FirstName = p.Sender.FirstName,
                         LastName = p.Sender.LastName,
                     }
@@ -144,13 +174,52 @@ namespace TicketingSystem.Web.Controllers
             return RedirectToAction("Get", "Project", new { id = projectId });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Update()
+        {
+            var model = new UpdateTicketViewModel()
+            {
+                States = Enum.GetValues<States>().ToList(),
+                Types = Enum.GetValues<Types>().ToList(),
+            };
 
+            return View("Update", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Guid id, UpdateTicketViewModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            var entityTicket = await _repo.GetByIdAsync<Ticket>(id);
+
+            entityTicket.State = request.State;
+            entityTicket.Type= request.Type;
+
+            await _repo.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Get), new { Id = id });
+        }
+
+        public async Task<IActionResult> Delete(
+           [FromRoute]
+            Guid id)
+        {
+            await _repo.DeleteAsync<Ticket>(id);
+            await _repo.SaveChangesAsync();
+
+            return RedirectToAction(nameof(List));
+        }
 
         public async Task<IActionResult> DeleteMine(
            [FromRoute]
             Guid id)
         {
             await _repo.DeleteAsync<Ticket>(id);
+            await _repo.SaveChangesAsync();
 
             return RedirectToAction(nameof(ListMine));
         }

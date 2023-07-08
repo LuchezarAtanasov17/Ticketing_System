@@ -1,0 +1,41 @@
+﻿@using TicketingSystem.Web.Models.Tickets;
+
+@model UpdateTicketViewModel
+
+@{
+    ViewBag.Title = "Update service";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <input type="hidden" asp-for="@Model.Id" />
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">State</label><br />
+                <select asp-for="@Model.State">
+                    @foreach (var state in Model.States)
+                    {
+                        <option value="@state"> @state</option>
+                    }
+                </select>
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type</label><br />
+                <select asp-for="@Model.Type">
+                    @foreach (var type in Model.Types)
+                    {
+                        <option value="@type"> @type</option>
+                    }
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" asp-controller="Ticket" asp-action="Update" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
