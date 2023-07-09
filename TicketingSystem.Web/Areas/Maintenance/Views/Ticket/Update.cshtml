@@ -3,7 +3,7 @@
 @model UpdateTicketViewModel
 
 @{
-    ViewBag.Title = "Update service";
+    ViewBag.Title = "Update ticket";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -24,7 +24,7 @@
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Type</label><br />
+                <label asp-for="@Model.Type" class="form-label">Type</label><br />
                 <select asp-for="@Model.Type">
                     @foreach (var type in Model.Types)
                     {

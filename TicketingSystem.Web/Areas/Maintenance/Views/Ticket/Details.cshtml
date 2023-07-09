@@ -38,19 +38,20 @@
                 <b>@Model.Sender.Email</b>
             </p>
         </div>
+        <div class="mb-3">
+            @if (Model.SenderId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            {
+                <a class="ml-2 btn btn-danger" asp-controller="Ticket" asp-action="DeleteMine"
+               asp-route-id="@Model.Id">Delete</a>
+            }
+            else
+            {
+                <a class="ml-2 btn btn-danger" asp-controller="Ticket" asp-action="Delete"
+               asp-route-id="@Model.Id">Delete</a>
+            }
 
-        @if (Model.SenderId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
-        {
-            <a class="ml-2 btn btn-danger" asp-controller="Ticket" asp-action="DeleteMine"
-           asp-route-id="@Model.Id">Delete</a>
-        }
-        else
-        {
-            <a class="ml-2 btn btn-danger" asp-controller="Ticket" asp-action="Delete"
-           asp-route-id="@Model.Id">Delete</a>
-        }
-
-        <a class="btn btn-warning" asp-controller="Ticket" asp-action="Update"
-           asp-route-id="@Model.Id">Edit</a>
+            <a class="btn btn-warning" asp-controller="Ticket" asp-action="Update"
+               asp-route-id="@Model.Id">Edit</a>
+        </div>
     </div>
 </div>

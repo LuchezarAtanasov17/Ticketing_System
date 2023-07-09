@@ -1,0 +1,30 @@
+﻿@using TicketingSystem.Web.Models.Tickets;
+
+@model List<TicketViewModel>
+
+<table class="table">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Ticket name</th>
+            <th scope="col">Writer user name</th>
+            <th scope="col">Release date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td>@Model[i].Title</td>
+                <td>@Model[i].Sender.UserName</td>
+                <td>@Model[i].ReleaseDate</td>
+                <td>
+                    <a class="ml-2 btn btn-outline-secondary" asp-area="Maintenance" asp-controller="Ticket" asp-action="Get"
+                   asp-route-id="@Model[i].Id">More</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 
