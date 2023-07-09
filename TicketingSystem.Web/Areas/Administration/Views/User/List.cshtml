@@ -11,6 +11,8 @@
             <th scope="col">Email</th>
             <th scope="col">Full name</th>
             <th scope="col">Username</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +24,7 @@
                 <td>@($"{Model[i].FirstName} {@Model[i].LastName}")</td>
                 <td>@Model[i].UserName</td>
                 <td>
-                    <a class="ml-2 btn btn-outline-warning" asp-area="Administration" asp-controller="User" asp-action="Edit"
+                    <a class="ml-2 btn btn-warning" asp-area="Administration" asp-controller="User" asp-action="Update"
                    asp-route-id="@Model[i].Id">Edit</a>
                 </td>
                 <td>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Models;
 using TicketingSystem.Web.Models.Users;
@@ -18,9 +19,11 @@ namespace TicketingSystem.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var entityUsers = await _repo.All<User>()
+            var users = await _repo.All<User>()
+                .Where(x => x.Id != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 .Select(x => new UserViewModel
                 {
+                    Id = x.Id,
                     UserName = x.UserName,
                     Email = x.Email,
                     FirstName = x.FirstName,
@@ -28,23 +31,7 @@ namespace TicketingSystem.Web.Areas.Administration.Controllers
                 })
                 .ToListAsync();
 
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            var entityUser = await _repo.GetByIdAsync<User>(id);
-
-            var user = new UserViewModel()
-            {
-                UserName = entityUser.UserName,
-                Email = entityUser.Email,
-                FirstName = entityUser.FirstName,
-                LastName = entityUser.LastName,
-            };
-
-            return View(user);
+            return View(users);
         }
 
         [HttpGet]
@@ -53,8 +40,8 @@ namespace TicketingSystem.Web.Areas.Administration.Controllers
             Guid id)
         {
             var entityUser = await _repo.GetByIdAsync<User>(id);
-
-            var user = new UserViewModel()
+            
+            var user = new UpdateUserRequest()
             {
                 UserName = entityUser.UserName,
                 FirstName = entityUser.FirstName,
@@ -77,10 +64,10 @@ namespace TicketingSystem.Web.Areas.Administration.Controllers
             entityUser.Email = request.Email;
             entityUser.FirstName = request.FirstName;
             entityUser.LastName = request.LastName;
-            
+
             await _repo.SaveChangesAsync();
-            
-            return RedirectToAction(nameof(Get), new {id = id});
+
+            return RedirectToAction(nameof(List));
         }
 
         public async Task<IActionResult> Delete(Guid id)
