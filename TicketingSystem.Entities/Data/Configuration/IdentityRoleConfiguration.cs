@@ -41,8 +41,8 @@ namespace TicketingSystem.Entities.Data.Configuration
             role = new Role()
             {
                 Id = Guid.Parse("0378ef66-3332-4860-ad38-773ed8c0594a"),
-                Name = "Мaintenance",
-                NormalizedName = "Мaintenance".ToUpper(),
+                Name = "Maintenance",
+                NormalizedName = "Maintenance".ToUpper(),
                 ConcurrencyStamp = "b832276f-ec40-4348-95c3-a49808529b84"
             };
             roles.Add(role);

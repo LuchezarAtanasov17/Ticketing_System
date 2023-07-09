@@ -12,7 +12,7 @@ using TicketingSystem.Entities.Data;
 namespace TicketingSystem.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230707182827_Initial")]
+    [Migration("20230709190430_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,8 +251,8 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("0378ef66-3332-4860-ad38-773ed8c0594a"),
                             ConcurrencyStamp = "b832276f-ec40-4348-95c3-a49808529b84",
-                            Name = "Мaintenance",
-                            NormalizedName = "МAINTENANCE"
+                            Name = "Maintenance",
+                            NormalizedName = "MAINTENANCE"
                         });
                 });
 
@@ -413,7 +413,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf5e9e7d-4faf-492d-897c-56e747d38746",
+                            ConcurrencyStamp = "7cc9c0a2-7761-4f28-ba4a-24e44fb244f7",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -429,7 +429,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "26c3e852-7746-458b-aebb-59aaee789224",
+                            ConcurrencyStamp = "2819618b-e4f4-4e10-bb3a-0cc15fbf1f32",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
