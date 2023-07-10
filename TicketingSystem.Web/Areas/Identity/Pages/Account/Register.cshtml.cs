@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Models;
 
 namespace TicketingSystem.Web.Areas.Identity.Pages.Account
@@ -30,13 +31,15 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IRepository _repo;
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRepository repo)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _repo = repo;
         }
 
         /// <summary>
@@ -135,6 +139,15 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
                 user.LastName = Input.LastName;
                 user.IsApproved = !_userManager.Users.Any(x => x.IsApproved);
 
+                RegisterRequest registerRequest = new RegisterRequest()
+                {
+                    User = user,
+                    UserId = user.Id,
+                    CreatedOn = DateTime.UtcNow,
+                };
+
+                await _repo.AddAsync(registerRequest);
+
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -156,7 +169,6 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
 
                         return LocalRedirect(returnUrl);
                     }
-                }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

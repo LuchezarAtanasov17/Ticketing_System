@@ -1,0 +1,39 @@
+﻿@using TicketingSystem.Web.Models.RegisterRequest;
+
+@model List<RegisterRequestViewModel>
+
+<h2 class="text-center">All users</h2>
+
+<table class="table">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Date of request</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td>@Model[i].User.Email</td>
+                <td>@($"{Model[i].User.FirstName} {@Model[i].User.LastName}")</td>
+                <td>@Model[i].User.UserName</td>
+                <td>@Model[i].CreatedOn</td>
+                <td>
+                    <a class="ml-2 btn btn-success" asp-area="Administration" asp-controller="RegisterRequest" asp-action="Approve"
+                   asp-route-id="@Model[i].Id">Approve</a>
+                </td>
+                <td>
+                    <a class="ml-2 btn btn-danger" asp-area="Administration" asp-controller="RegisterRequest" asp-action="Decline"
+                   asp-route-id="@Model[i].Id">Decline</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
