@@ -18,6 +18,8 @@ namespace TicketingSystem.Entities.Data
 
         public DbSet<Ticket> Tickets { get; set; }
 
+        public DbSet<RegisterRequest> RegisterRequests { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new IdentityRoleConfiguration());

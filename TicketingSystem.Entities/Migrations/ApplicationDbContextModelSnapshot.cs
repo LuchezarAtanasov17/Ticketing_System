@@ -220,7 +220,7 @@ namespace TicketingSystem.Entities.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("RegisterRequest");
+                    b.ToTable("RegisterRequests");
                 });
 
             modelBuilder.Entity("TicketingSystem.Entities.Models.Role", b =>
@@ -434,7 +434,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05fd7f57-dded-449c-b8b9-5f83b367fe5d",
+                            ConcurrencyStamp = "dc423e7c-ff85-454d-baf2-531589ec21e5",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -451,7 +451,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f96aced5-7f37-4ee3-a1c3-b0e155bd35cb",
+                            ConcurrencyStamp = "eb9068f3-c28e-4ef1-a278-4038e6721e87",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",

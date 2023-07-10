@@ -171,6 +171,25 @@ namespace TicketingSystem.Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RegisterRequests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RegisterRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RegisterRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -244,8 +263,8 @@ namespace TicketingSystem.Entities.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "43121784-b4f3-4b99-bf3b-bdefd465a6bf", "user2@gmail.com", false, "Georgi", false, "Georgiev", false, null, "USER2@GMAIL.COM", "USER2", null, null, false, null, false, "User2" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "9de3f684-103c-4dba-bb6f-2831623a516d", "user@mail.com", false, "Ivan", false, "Ivanov", false, null, "USER@MAIL.COM", "USER", null, null, false, null, false, "User" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "eb9068f3-c28e-4ef1-a278-4038e6721e87", "user2@gmail.com", false, "Georgi", false, "Georgiev", false, null, "USER2@GMAIL.COM", "USER2", null, null, false, null, false, "User2" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "dc423e7c-ff85-454d-baf2-531589ec21e5", "user@mail.com", false, "Ivan", false, "Ivanov", false, null, "USER@MAIL.COM", "USER", null, null, false, null, false, "User" }
                 });
 
             migrationBuilder.InsertData(
@@ -323,6 +342,12 @@ namespace TicketingSystem.Entities.Migrations
                 column: "TicketId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RegisterRequests_UserId",
+                table: "RegisterRequests",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ProjectId",
                 table: "Tickets",
                 column: "ProjectId");
@@ -352,6 +377,9 @@ namespace TicketingSystem.Entities.Migrations
 
             migrationBuilder.DropTable(
                 name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "RegisterRequests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
