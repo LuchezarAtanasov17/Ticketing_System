@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TicketingSystem.Entities.Data.Common;
@@ -40,13 +41,23 @@ namespace TicketingSystem.Web.Areas.Administration.Controllers
             Guid id)
         {
             var entityUser = await _repo.GetByIdAsync<User>(id);
-            
+
+            var identityUserRole = await _repo
+               .All<IdentityUserRole<Guid>>()
+               .FirstOrDefaultAsync(x => x.UserId == id);
+
+            var role = await _repo.GetByIdAsync<Role>(identityUserRole.RoleId);
+            var roles = await _repo.All<Role>().ToListAsync();
+
             var user = new UpdateUserRequest()
             {
                 UserName = entityUser.UserName,
                 FirstName = entityUser.FirstName,
                 LastName = entityUser.LastName,
                 Email = entityUser.Email,
+                RoleId= role.Id,
+                //Role = role,
+                Roles= roles
             };
 
             return View(user);
@@ -60,11 +71,20 @@ namespace TicketingSystem.Web.Areas.Administration.Controllers
         {
             var entityUser = await _repo.GetByIdAsync<User>(id);
 
+            var identityUserRole = await _repo
+               .All<IdentityUserRole<Guid>>()
+               .FirstOrDefaultAsync(x => x.UserId == id);
+
             entityUser.UserName = request.UserName;
             entityUser.Email = request.Email;
             entityUser.FirstName = request.FirstName;
             entityUser.LastName = request.LastName;
 
+            _repo.Delete<IdentityUserRole<Guid>>(identityUserRole);
+            await _repo.SaveChangesAsync();
+            identityUserRole.UserId = id;
+            identityUserRole.RoleId = request.RoleId;
+            await _repo.AddAsync<IdentityUserRole<Guid>>(identityUserRole);
             await _repo.SaveChangesAsync();
 
             return RedirectToAction(nameof(List));

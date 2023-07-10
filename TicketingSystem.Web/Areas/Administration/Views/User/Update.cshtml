@@ -34,6 +34,16 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="@Model.RoleId" class="form-label">Role</label><br />
+                <select asp-for="@Model.RoleId">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role.Id"> @role.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <input class="btn btn-primary" asp-area="Administration" asp-controller="User" asp-action="Update" type="submit" value="Save" />
             </div>
         </form>

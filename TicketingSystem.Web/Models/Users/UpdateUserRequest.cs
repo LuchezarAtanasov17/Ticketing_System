@@ -1,4 +1,6 @@
-﻿namespace TicketingSystem.Web.Models.Users
+﻿using TicketingSystem.Entities.Models;
+
+namespace TicketingSystem.Web.Models.Users
 {
     public class UpdateUserRequest
     {
@@ -11,5 +13,10 @@
         public string? LastName { get; set; }
 
         public string Email { get; set; } = null!;
+
+        public Guid RoleId { get; set; }
+       // public Role? Role { get; set; }
+
+        public List<Role>? Roles { get; set; }
     }
 }
