@@ -28,7 +28,8 @@ namespace TicketingSystem.Entities.Data.Configuration
                 Email = "user@mail.com",
                 NormalizedEmail = "user@mail.com".ToUpper(),
                 FirstName = "Ivan",
-                LastName = "Ivanov"
+                LastName = "Ivanov",
+                IsApproved = false,
             };
             users.Add(user);
 
@@ -41,6 +42,7 @@ namespace TicketingSystem.Entities.Data.Configuration
                 NormalizedEmail = "user2@gmail.com".ToUpper(),
                 FirstName = "Georgi",
                 LastName = "Georgiev",
+                IsApproved= false,
             };
             users.Add(user);
 

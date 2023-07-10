@@ -12,7 +12,7 @@ using TicketingSystem.Entities.Data;
 namespace TicketingSystem.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230709190430_Initial")]
+    [Migration("20230710194850_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -358,6 +358,9 @@ namespace TicketingSystem.Entities.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -413,10 +416,11 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7cc9c0a2-7761-4f28-ba4a-24e44fb244f7",
+                            ConcurrencyStamp = "9de3f684-103c-4dba-bb6f-2831623a516d",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
+                            IsApproved = false,
                             LastName = "Ivanov",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@MAIL.COM",
@@ -429,10 +433,11 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2819618b-e4f4-4e10-bb3a-0cc15fbf1f32",
+                            ConcurrencyStamp = "43121784-b4f3-4b99-bf3b-bdefd465a6bf",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
+                            IsApproved = false,
                             LastName = "Georgiev",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",

@@ -17,5 +17,8 @@ namespace TicketingSystem.Entities.Models
         [Required]
         [StringLength(30)]
         public string LastName { get; set; }
+
+        [Required]
+        public bool IsApproved { get; set; }
     }
 }
