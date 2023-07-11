@@ -8,6 +8,15 @@
 }
 else
 {
+
+    @if (this.User.IsInRole("Administrator"))
+    {
+        <div>
+            <a class="ml-2 btn btn-primary" asp-area="Administration" asp-controller="Project" asp-action="Create">Create project</a>
+        </div>
+        <br />
+    }
+
     <div class="position-relative">
         <div class="row">
             @foreach (var project in Model)

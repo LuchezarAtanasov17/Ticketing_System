@@ -23,9 +23,9 @@ namespace TicketingSystem.Web.Controllers
             var projects = await _repo.All<Project>()
                 .Select(p => new ProjectViewModel()
                 {
-                    Id= p.Id,
+                    Id = p.Id,
                     Name = p.Name,
-                    Description= p.Description,
+                    Description = p.Description,
                 })
                 .ToListAsync();
 

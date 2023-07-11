@@ -151,6 +151,7 @@ namespace TicketingSystem.Web.Controllers
             Guid id)
         {
             await _repo.DeleteAsync<Ticket>(id);
+            await _repo.SaveChangesAsync();
 
             return RedirectToAction(nameof(ListMine));
         }

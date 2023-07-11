@@ -1,0 +1,25 @@
+﻿@using TicketingSystem.Web.Models.Projects;
+
+@model CreateProjectRequest
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form enctype="multipart/form-data" method="post">
+            <h4 class="form-label text-center">Create project</h4>
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label">Name</label>
+                <input type="text" asp-for="@Model.Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Description" class="form-label">Description</label>
+                <input type="text" asp-for="@Model.Description" class="form-control" aria-required="true" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" asp-area="Administration" asp-controller="Project" asp-action="Create" type="submit" value="Save" />
+                <input class="btn btn-secondary" asp-controller="Project" asp-action="List" type="submit" value="Cancel" />
+            </div>
+        </form>
+    </div>
+</div>
