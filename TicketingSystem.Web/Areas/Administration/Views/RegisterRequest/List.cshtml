@@ -30,8 +30,9 @@
                    asp-route-id="@Model[i].Id">Approve</a>
                 </td>
                 <td>
-                    <a class="ml-2 btn btn-danger" asp-area="Administration" asp-controller="RegisterRequest" asp-action="Decline"
-                   asp-route-id="@Model[i].Id">Decline</a>
+                    <form asp-area="Administration" asp-controller="RegisterRequest" asp-action="Decline" asp-route-id="@Model[i].Id">
+                            <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to decline this register request?')" />
+                    </form>
                 </td>
             </tr>
         }

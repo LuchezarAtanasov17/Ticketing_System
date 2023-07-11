@@ -28,8 +28,9 @@
                    asp-route-id="@Model[i].Id">Edit</a>
                 </td>
                 <td>
-                    <a class="ml-2 btn btn-danger" asp-area="Administration" asp-controller="User" asp-action="Delete"
-                   asp-route-id="@Model[i].Id">Delete</a>
+                    <form asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@Model[i].Id">
+                        <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this user?')" />
+                    </form>
                 </td>
             </tr>
         }
