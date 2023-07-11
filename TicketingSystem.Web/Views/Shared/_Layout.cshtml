@@ -24,10 +24,27 @@
                         </li>
                         @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                         {
-                            @if (this.User.IsInRole("User"))
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="List">Projects</a>
+                            </li>
+                            @if (this.User.IsInRole("Maintenance") || this.User.IsInRole("Administrator"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="List">Projects</a>
+                                    <a class="nav-link text-dark" asp-area="Maintenance" asp-controller="Ticket" asp-action="List">Tickets</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="ListMine">My tickets</a>
+                            </li>
+
+                            @if (this.User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="User" asp-action="List">Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="RegisterRequest" asp-action="List">Register requests</a>
                                 </li>
                             }
                         }
