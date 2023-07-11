@@ -26,6 +26,7 @@
         {
             <form asp-area="Administration" asp-controller="Project" asp-action="Delete" asp-route-id="@Model.Id">
                 <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this project?')" />
+                <input class="btn btn-secondary" asp-controller="Project" asp-action="List" formmethod="get" type="submit" value="Cancel" />
             </form>
         }
     </div>
