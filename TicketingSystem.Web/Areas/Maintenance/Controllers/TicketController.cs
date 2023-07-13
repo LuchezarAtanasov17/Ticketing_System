@@ -5,6 +5,7 @@ using System.Security.Claims;
 using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Enums.Tickets;
 using TicketingSystem.Entities.Models;
+using TicketingSystem.Web.Models.Messages;
 using TicketingSystem.Web.Models.Projects;
 using TicketingSystem.Web.Models.Tickets;
 using TicketingSystem.Web.Models.Users;
@@ -24,6 +25,7 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
         public async Task<IActionResult> List()
         {
             var tickets = await _repo.All<Ticket>()
+                .Where(x=>x.SenderId != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 .Select(p => new TicketViewModel()
                 {
                     Id = p.Id,
@@ -49,36 +51,6 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
             return View("List", tickets);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> ListMine()
-        //{
-        //    var tickets = await _repo.All<Ticket>()
-        //        .Select(p => new TicketViewModel()
-        //        {
-        //            Id = p.Id,
-        //            Description = p.Description,
-        //            Type = p.Type,
-        //            State = p.State,
-        //            Title = p.Title,
-        //            SenderId = p.SenderId,
-        //            ProjectId = p.ProjectId,
-        //            Files = p.Files,
-        //            ReleaseDate = p.ReleaseDate,
-        //            Sender = new UserViewModel()
-        //            {
-        //                UserName = p.Sender.UserName,
-        //                Email = p.Sender.Email,
-        //                Id = p.Id,
-        //                FirstName = p.Sender.FirstName,
-        //                LastName = p.Sender.LastName,
-        //            }
-        //        })
-        //        .Where(x => x.SenderId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //        .ToListAsync();
-
-        //    return View("ListMine", tickets);
-        //}
-
         [HttpGet]
         public async Task<IActionResult> Get(
            [FromRoute]
@@ -86,6 +58,26 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
         {
             var entityProject = await _repo.GetByIdAsync<Ticket>(id);
             var enitityUser = await _repo.GetByIdAsync<User>(entityProject.SenderId);
+            var entityMessages = await _repo
+                .All<Message>()
+                .Select(x => new MessageViewModel()
+                {
+                    Id = x.Id,
+                    AuthorId = x.AuthorId,
+                    Content = x.Content,
+                    PublishedOn = x.PublishedOn,
+                    State = x.State,
+                    Files = x.Files,
+                    Author = new UserViewModel()
+                    {
+                        Id = x.Author.Id,
+                        Email = x.Author.Email,
+                        FirstName = x.Author.FirstName,
+                        LastName = x.Author.LastName,
+                        UserName = x.Author.UserName,
+                    }
+                })
+                .ToListAsync();
 
             UserViewModel userViewModel = new UserViewModel()
             {
@@ -107,7 +99,8 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
                 ProjectId = entityProject.ProjectId,
                 Files = entityProject.Files,
                 ReleaseDate = entityProject.ReleaseDate,
-                Sender = userViewModel
+                Sender = userViewModel,
+                Messages = entityMessages
             };
 
             return View("Details", ticket);
@@ -173,11 +166,17 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update()
+        public async Task<IActionResult> Update(
+            [FromRoute]
+            Guid id)
         {
+            var ticket = await _repo.GetByIdAsync<Ticket>(id);
+
             var model = new UpdateTicketViewModel()
             {
+                Type = ticket.Type,
                 States = Enum.GetValues<States>().ToList(),
+                State= ticket.State,
                 Types = Enum.GetValues<Types>().ToList(),
             };
 
@@ -211,15 +210,5 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
 
             return RedirectToAction(nameof(List));
         }
-
-        //public async Task<IActionResult> DeleteMine(
-        //   [FromRoute]
-        //    Guid id)
-        //{
-        //    await _repo.DeleteAsync<Ticket>(id);
-        //    await _repo.SaveChangesAsync();
-
-        //    return RedirectToAction(nameof(ListMine));
-        //}
     }
 }

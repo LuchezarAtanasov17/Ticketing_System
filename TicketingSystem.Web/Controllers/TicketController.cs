@@ -5,6 +5,7 @@ using System.Security.Claims;
 using TicketingSystem.Entities.Data.Common;
 using TicketingSystem.Entities.Enums.Tickets;
 using TicketingSystem.Entities.Models;
+using TicketingSystem.Web.Models.Messages;
 using TicketingSystem.Web.Models.Projects;
 using TicketingSystem.Web.Models.Tickets;
 using TicketingSystem.Web.Models.Users;
@@ -56,33 +57,58 @@ namespace TicketingSystem.Web.Controllers
            [FromRoute]
             Guid id)
         {
-            var entityProject = await _repo.GetByIdAsync<Ticket>(id);
-            var enitityUser = await _repo.GetByIdAsync<User>(entityProject.SenderId);
+            var entityTicket = await _repo.GetByIdAsync<Ticket>(id);
+            var enitityUser = await _repo.GetByIdAsync<User>(entityTicket.SenderId);
+            var entityMessages = await _repo
+                .All<Message>()
+                .Select(x => new MessageViewModel()
+                {
+                    Id = x.Id,
+                    AuthorId = x.AuthorId,
+                    Content = x.Content,
+                    PublishedOn = x.PublishedOn,
+                    State = x.State,
+                    Files = x.Files,
+                    Author = new UserViewModel()
+                    {
+                        Id= x.Author.Id,
+                        Email = x.Author.Email,
+                        FirstName= x.Author.FirstName,
+                        LastName= x.Author.LastName,
+                        UserName= x.Author.UserName,
+                    }
+                })
+                .ToListAsync();
 
             UserViewModel userViewModel = new UserViewModel()
             {
                 Email = enitityUser.Email,
                 FirstName = enitityUser.FirstName,
                 LastName = enitityUser.LastName,
-                Id = entityProject.Id,
+                Id = entityTicket.Id,
                 UserName = enitityUser.UserName,
             };
 
             TicketViewModel ticket = new TicketViewModel()
             {
-                Id = entityProject.Id,
-                Description = entityProject.Description,
-                Type = entityProject.Type,
-                State = entityProject.State,
-                Title = entityProject.Title,
-                SenderId = entityProject.SenderId,
-                ProjectId = entityProject.ProjectId,
-                Files = entityProject.Files,
-                ReleaseDate = entityProject.ReleaseDate,
-                Sender = userViewModel
+                Id = entityTicket.Id,
+                Description = entityTicket.Description,
+                Type = entityTicket.Type,
+                State = entityTicket.State,
+                Title = entityTicket.Title,
+                SenderId = entityTicket.SenderId,
+                ProjectId = entityTicket.ProjectId,
+                Files = entityTicket.Files,
+                ReleaseDate = entityTicket.ReleaseDate,
+                Sender = userViewModel,
+                Messages= entityMessages,
+                CreateMessageRequest = new CreateMessageRequest()
+                {
+                    TicketId= id,
+                }
             };
 
-            return View("Details", ticket);
+                return View("Details", ticket);
         }
 
         [HttpGet]

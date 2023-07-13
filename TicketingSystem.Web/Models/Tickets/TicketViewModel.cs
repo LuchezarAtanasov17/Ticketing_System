@@ -15,7 +15,7 @@ namespace TicketingSystem.Web.Models.Tickets
 
         public DateTime ReleaseDate { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         public string? Description { get; set; }
 
@@ -23,12 +23,14 @@ namespace TicketingSystem.Web.Models.Tickets
 
         public States State { get; set; }
 
-        public UserViewModel Sender { get; set; }
+        public UserViewModel? Sender { get; set; }
 
-        public ProjectViewModel Project { get; set; }
+        public ProjectViewModel? Project { get; set; }
 
         public byte[]? Files { get; set; }
 
-        public ICollection<MessageViewModel> Messages { get; set; }
+        public ICollection<MessageViewModel>? Messages { get; set; }
+
+        public CreateMessageRequest? CreateMessageRequest { get; set; }
     }
 }

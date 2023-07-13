@@ -44,3 +44,12 @@
         </form>
     </div>
 </div>
+
+<div>
+    <partial name="MessagesFormPartial" model="@new TicketViewModelPartial(){TicketId = Model.Id, TicketSenderId = Model.SenderId, Messages = Model.Messages.ToList()}" />
+
+
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }
+</div>

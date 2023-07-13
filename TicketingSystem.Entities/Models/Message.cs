@@ -17,6 +17,8 @@ namespace TicketingSystem.Entities.Models
         [Required]
         public Guid AuthorId { get; set; }
 
+        public Guid TicketId { get; set; }
+
         [Required]
         public DateTime PublishedOn { get; set; }
 
@@ -29,7 +31,9 @@ namespace TicketingSystem.Entities.Models
 
         [ForeignKey(nameof(AuthorId))]
         public User Author { get; set; }
-        
+
+        public Ticket Ticket { get; set; }
+
         public byte[]? Files { get; set; }
 
     }

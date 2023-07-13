@@ -3,15 +3,17 @@ using TicketingSystem.Web.Models.Users;
 
 namespace TicketingSystem.Web.Models.Messages
 {
-    public class MessageViewModel
+    public class CreateMessageRequest
     {
         public Guid Id { get; set; }
 
-        public Guid? AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
+
+        public Guid TicketId { get; set; }
 
         public DateTime PublishedOn { get; set; }
 
-        public States? State { get; set; }
+        public States State { get; set; }
 
         public string Content { get; set; }
 
