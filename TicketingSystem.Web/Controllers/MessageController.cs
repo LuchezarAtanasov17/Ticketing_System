@@ -63,5 +63,87 @@ namespace TicketingSystem.Web.Controllers
 
             return RedirectToAction("Get", "Ticket", new {id = ticketId});
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDraft(
+            TicketViewModelPartial request,
+            Guid ticketId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var message = new Message()
+            {
+                TicketId = ticketId,
+                AuthorId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                State = Entities.Enums.Messages.States.Draft,
+                Content = request.CreateMessageRequest.Content,
+                PublishedOn = DateTime.UtcNow,
+            };
+
+            await _repo.AddAsync(message);
+            await _repo.SaveChangesAsync();
+
+            return RedirectToAction("Get", "Ticket", new { id = ticketId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateDraft(
+            TicketViewModelPartial request,
+            Guid ticketId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var message = await _repo.GetByIdAsync<Message>(request.UpdateDraftMessageRequest.MessageId);
+            message.Content = request.UpdateDraftMessageRequest.Content;
+
+            await _repo.SaveChangesAsync();
+
+            return RedirectToAction("Get", "Ticket", new { id = ticketId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendDraft(
+            TicketViewModelPartial request,
+            Guid ticketId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var message = await _repo.GetByIdAsync<Message>(request.UpdateDraftMessageRequest.MessageId);
+            message.Content = request.UpdateDraftMessageRequest.Content;
+            message.State = Entities.Enums.Messages.States.Published;
+
+            await _repo.SaveChangesAsync();
+
+            return RedirectToAction("Get", "Ticket", new { id = ticketId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteDraft(
+            TicketViewModelPartial request,
+            Guid ticketId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await _repo.DeleteAsync<Message>(request.UpdateDraftMessageRequest.MessageId);
+            await _repo.SaveChangesAsync();
+
+            return RedirectToAction("Get", "Ticket", new { id = ticketId });
+        }
     }
 }

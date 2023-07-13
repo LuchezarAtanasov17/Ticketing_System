@@ -8,8 +8,10 @@ namespace TicketingSystem.Web.Models.Tickets
 
         public Guid TicketSenderId { get; set; }
 
-        public CreateMessageRequest CreateMessageRequest { get; set; }
+        public CreateMessageRequest? CreateMessageRequest { get; set; }
 
         public List<MessageViewModel>? Messages { get; set; }
+
+        public UpdateDraftMessageRequest? UpdateDraftMessageRequest { get; set; }
     }
 }
