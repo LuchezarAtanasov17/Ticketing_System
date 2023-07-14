@@ -22,5 +22,7 @@ namespace TicketingSystem.Entities.Models
         public bool IsApproved { get; set; }
 
         public RegisterRequest? RegisterRequest { get; set; }
+
+        public ICollection<Message> Messages { get; set; } = new HashSet<Message>();
     }
 }

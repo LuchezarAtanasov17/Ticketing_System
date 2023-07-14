@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using TicketingSystem.Entities.Data.Configuration;
 using TicketingSystem.Entities.Models;
 
@@ -26,6 +27,11 @@ namespace TicketingSystem.Entities.Data
             builder.ApplyConfiguration(new ProjectConfiguration());
             builder.ApplyConfiguration(new TicketConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+
+            builder.Entity<Message>()
+                .HasOne(e => e.Ticket)
+                .WithMany(e => e.Messages)
+                .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(builder);
         }

@@ -434,7 +434,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d91328b-7c4d-4fe1-8b9a-279dca616447",
+                            ConcurrencyStamp = "b0dda18d-19a5-4d48-bfef-00886158927e",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -451,7 +451,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d39209af-d10d-4c49-a87f-b28cb8c821a5",
+                            ConcurrencyStamp = "70336c51-d823-4f4c-9fcd-68b1df263f85",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
@@ -520,7 +520,7 @@ namespace TicketingSystem.Entities.Migrations
             modelBuilder.Entity("TicketingSystem.Entities.Models.Message", b =>
                 {
                     b.HasOne("TicketingSystem.Entities.Models.User", "Author")
-                        .WithMany()
+                        .WithMany("Messages")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -528,7 +528,7 @@ namespace TicketingSystem.Entities.Migrations
                     b.HasOne("TicketingSystem.Entities.Models.Ticket", "Ticket")
                         .WithMany("Messages")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Author");
@@ -578,6 +578,8 @@ namespace TicketingSystem.Entities.Migrations
 
             modelBuilder.Entity("TicketingSystem.Entities.Models.User", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("RegisterRequest");
                 });
 #pragma warning restore 612, 618
