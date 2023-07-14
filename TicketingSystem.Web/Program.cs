@@ -63,4 +63,11 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();
 });
 
+// Migrate database
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await dataContext.Database.MigrateAsync();
+}
+
 app.Run();
