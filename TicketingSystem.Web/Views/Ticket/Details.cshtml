@@ -42,7 +42,7 @@
 </div>
 
 <div>
-    <partial name="MessagesFormPartial" model="@new TicketViewModelPartial(){TicketId = Model.Id, TicketSenderId = Model.SenderId, Messages = Model.Messages.ToList()}" />
+    <partial name="MessagesFormPartial" model="@new TicketViewModelPartial(){TicketId = Model.Id, TicketSenderId = Model.SenderId, Messages = Model.Messages.ToList(), State = Model.State}" />
 
 
     @section Scripts{

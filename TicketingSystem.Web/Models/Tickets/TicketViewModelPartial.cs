@@ -1,4 +1,5 @@
-﻿using TicketingSystem.Web.Models.Messages;
+﻿using TicketingSystem.Entities.Enums.Tickets;
+using TicketingSystem.Web.Models.Messages;
 
 namespace TicketingSystem.Web.Models.Tickets
 {
@@ -7,6 +8,8 @@ namespace TicketingSystem.Web.Models.Tickets
         public Guid TicketId { get; set; }
 
         public Guid TicketSenderId { get; set; }
+
+        public States State { get; set; }
 
         public CreateMessageRequest? CreateMessageRequest { get; set; }
 

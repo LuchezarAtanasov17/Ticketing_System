@@ -6,13 +6,16 @@
 {
     <h2 class="text-center">There aren't any tickets.</h2>
 }
+else
+{
 
-<h2 class="text-center">My tickets</h2>
-<hr />
+    <h2 class="text-center">My tickets</h2>
+    <hr />
 
-<partial name="TicketListPartial" />
+    <partial name="TicketListPartial" />
 
 
-@section Scripts{
+    @section Scripts{
     <partial name="_ValidationScriptsPartial" />
+}
 }

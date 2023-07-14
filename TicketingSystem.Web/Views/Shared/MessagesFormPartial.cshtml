@@ -36,32 +36,36 @@
     </div>
 </div>
 
-<form enctype="multipart/form-data" method="post">
-    <textarea asp-for="@Model.CreateMessageRequest.Content" rows="2" cols="140"></textarea>
-    <input class="btn btn-primary" style="margin-bottom: 50px" asp-controller="Message" asp-action="Create" asp-route-ticketId="@Model.TicketId" type="submit" value="Send" />
-    <input class="btn btn-secondary" style="margin-bottom: 50px" asp-controller="Message" asp-action="CreateDraft" asp-route-ticketId="@Model.TicketId" type="submit" value="Draft" />
-</form>
+@if (Model.State != TicketingSystem.Entities.Enums.Tickets.States.Completed)
+{
+    <form enctype="multipart/form-data" method="post">
+        <textarea asp-for="@Model.CreateMessageRequest.Content" rows="2" cols="140"></textarea>
+        <input class="btn btn-primary" style="margin-bottom: 50px" asp-controller="Message" asp-action="Create" asp-route-ticketId="@Model.TicketId" type="submit" value="Send" />
+        <input class="btn btn-secondary" style="margin-bottom: 50px" asp-controller="Message" asp-action="CreateDraft" asp-route-ticketId="@Model.TicketId" type="submit" value="Draft" />
+    </form>
 
-@*Drafts*@
-<h2 style="text-align: center;">Drafts</h2>
-<div class="overflow-auto" style="max-width: 1250px; max-height: 500px;">
-    <div class="bubbleWrapper">
-        @foreach (var message in Model.Messages
-        .Where(x => x.State == TicketingSystem.Entities.Enums.Messages.States.Draft)
-        .Where(x => x.AuthorId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
-        .OrderByDescending(x => x.PublishedOn))
-        {
-            <form enctype="multipart/form-data" method="post">
-                <input type="hidden" asp-for="@Model.UpdateDraftMessageRequest.MessageId" value="@message.Id" />
-                <input type="text" asp-for="@Model.UpdateDraftMessageRequest.Content" value="@message.Content" class="form-control" style="width: 1050px;" aria-required="true" />
-                <input class="btn btn-primary" asp-controller="Message" asp-action="SendDraft" asp-route-ticketId="@Model.TicketId" style="float:right; margin-right: 50px; margin-top:-40px;" type="submit" value="Send" />
-                <input class="btn btn-secondary" asp-controller="Message" asp-action="UpdateDraft" asp-route-ticketId="@Model.TicketId" style="float:right; margin-right: 120px; margin-top:-40px;" type="submit" value="Save" />
-                <input class="btn btn-danger" asp-controller="Message" asp-action="DeleteDraft" asp-route-ticketId="@Model.TicketId" style="float:right; margin-right:80px; margin-top:5px;" type="submit" value="Delete" />
-            </form>
-            <span class="own">@message.PublishedOn.Day/@message.PublishedOn.Month/@message.PublishedOn.Year @message.PublishedOn.Hour:@message.PublishedOn.Minute</span>
-        }
+    @*Drafts*@
+    <h2 style="text-align: center;">Drafts</h2>
+    <div class="overflow-auto" style="max-width: 1250px; max-height: 500px;">
+        <div class="bubbleWrapper">
+            @foreach (var message in Model.Messages
+           .Where(x => x.State == TicketingSystem.Entities.Enums.Messages.States.Draft)
+           .Where(x => x.AuthorId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+           .OrderByDescending(x => x.PublishedOn))
+            {
+                <form enctype="multipart/form-data" method="post">
+                    <input type="hidden" asp-for="@Model.UpdateDraftMessageRequest.MessageId" value="@message.Id" />
+                    <input type="text" asp-for="@Model.UpdateDraftMessageRequest.Content" value="@message.Content" class="form-control" style="width: 1050px;" aria-required="true" />
+                    <input class="btn btn-primary" asp-controller="Message" asp-action="SendDraft" asp-route-ticketId="@Model.TicketId" style="float:right; margin-right: 50px; margin-top:-40px;" type="submit" value="Send" />
+                    <input class="btn btn-secondary" asp-controller="Message" asp-action="UpdateDraft" asp-route-ticketId="@Model.TicketId" style="float:right; margin-right: 120px; margin-top:-40px;" type="submit" value="Save" />
+                    <input class="btn btn-danger" asp-controller="Message" asp-action="DeleteDraft" asp-route-ticketId="@Model.TicketId" style="float:right; margin-right:80px; margin-top:5px;" type="submit" value="Delete" />
+                </form>
+                <span class="own">@message.PublishedOn.Day/@message.PublishedOn.Month/@message.PublishedOn.Year @message.PublishedOn.Hour:@message.PublishedOn.Minute</span>
+            }
+        </div>
     </div>
-</div>
+}
+
 
 <style>
 
