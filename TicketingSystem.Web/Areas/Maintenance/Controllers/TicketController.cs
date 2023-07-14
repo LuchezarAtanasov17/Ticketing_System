@@ -174,6 +174,7 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
 
             var model = new UpdateTicketViewModel()
             {
+                Id = id,
                 Type = ticket.Type,
                 States = Enum.GetValues<States>().ToList(),
                 State= ticket.State,

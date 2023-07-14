@@ -2,37 +2,44 @@
 
 @model List<UserViewModel>
 
-<h2 class="text-center">All users</h2>
+@if (Model.Count == 0)
+{
+    <h2 class="text-center">There aren't any other users.</h2>
+}
+else
+{
+    <h2 class="text-center">All users</h2>
 
-<table class="table">
-    <thead>
-        <tr class="table-dark">
-            <th scope="col">#</th>
-            <th scope="col">Email</th>
-            <th scope="col">Full name</th>
-            <th scope="col">Username</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <tr>
-                <th scope="row">@(i + 1)</th>
-                <td>@Model[i].Email</td>
-                <td>@($"{Model[i].FirstName} {@Model[i].LastName}")</td>
-                <td>@Model[i].UserName</td>
-                <td>
-                    <a class="ml-2 btn btn-warning" asp-area="Administration" asp-controller="User" asp-action="Update"
-                   asp-route-id="@Model[i].Id">Edit</a>
-                </td>
-                <td>
-                    <form asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@Model[i].Id">
-                        <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this user?')" />
-                    </form>
-                </td>
+    <table class="table">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Full name</th>
+                <th scope="col">Username</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@Model[i].Email</td>
+                    <td>@($"{Model[i].FirstName} {@Model[i].LastName}")</td>
+                    <td>@Model[i].UserName</td>
+                    <td>
+                        <a class="ml-2 btn btn-warning" asp-area="Administration" asp-controller="User" asp-action="Update"
+                   asp-route-id="@Model[i].Id">Edit</a>
+                    </td>
+                    <td>
+                        <form asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@Model[i].Id">
+                            <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this user?')" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

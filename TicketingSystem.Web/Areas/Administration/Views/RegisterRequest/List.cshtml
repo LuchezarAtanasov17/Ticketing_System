@@ -2,39 +2,45 @@
 
 @model List<RegisterRequestViewModel>
 
-<h2 class="text-center">All users</h2>
-
-<table class="table">
-    <thead>
-        <tr class="table-dark">
-            <th scope="col">#</th>
-            <th scope="col">Email</th>
-            <th scope="col">Full name</th>
-            <th scope="col">Username</th>
-            <th scope="col">Date of request</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <tr>
-                <th scope="row">@(i + 1)</th>
-                <td>@Model[i].User.Email</td>
-                <td>@($"{Model[i].User.FirstName} {@Model[i].User.LastName}")</td>
-                <td>@Model[i].User.UserName</td>
-                <td>@Model[i].CreatedOn</td>
-                <td>
-                    <a class="ml-2 btn btn-success" asp-area="Administration" asp-controller="RegisterRequest" asp-action="Approve"
-                   asp-route-id="@Model[i].Id">Approve</a>
-                </td>
-                <td>
-                    <form asp-area="Administration" asp-controller="RegisterRequest" asp-action="Decline" asp-route-id="@Model[i].Id">
-                            <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to decline this register request?')" />
-                    </form>
-                </td>
+@if (Model.Count == 0)
+{
+    <h2 class="text-center">There is no users waiting to be registered.</h2>
+}
+else
+{
+    <h2 class="text-center">All users</h2>
+    <table class="table">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Full name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Date of request</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@Model[i].User.Email</td>
+                    <td>@($"{Model[i].User.FirstName} {@Model[i].User.LastName}")</td>
+                    <td>@Model[i].User.UserName</td>
+                    <td>@Model[i].CreatedOn</td>
+                    <td>
+                        <a class="ml-2 btn btn-success" asp-area="Administration" asp-controller="RegisterRequest" asp-action="Approve"
+                   asp-route-id="@Model[i].Id">Approve</a>
+                    </td>
+                    <td>
+                        <form asp-area="Administration" asp-controller="RegisterRequest" asp-action="Decline" asp-route-id="@Model[i].Id">
+                            <input class="ml-2 btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to decline this register request?')" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
