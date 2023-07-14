@@ -162,7 +162,7 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
                     // All other users will take User role.
                     else
                     {
-                        await _userManager.AddToRoleAsync(user, "Maintenance");
+                        await _userManager.AddToRoleAsync(user, "User");
                     }
 
                     _logger.LogInformation("User created a new account with password.");
