@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using TicketingSystem.Entities.Models;
 
 namespace TicketingSystem.Entities.Data.Configuration
@@ -27,7 +23,7 @@ namespace TicketingSystem.Entities.Data.Configuration
                 ProjectId = Guid.Parse("8c97398e-09d8-4823-a82d-343619758e81"),
                 Title = "Login issue.",
                 Description = "The app doesn't recognize my identity, when I try to log in.",
-                ReleaseDate = DateTime.Parse("23-04-2022"),
+                ReleaseDate = DateTime.ParseExact("23-04-2022", "dd-MM-yyyy", CultureInfo.InvariantCulture),
                 State = Enums.Tickets.States.Draft,
                 Type = Enums.Tickets.Types.BugReport,
             };
@@ -40,7 +36,7 @@ namespace TicketingSystem.Entities.Data.Configuration
                 ProjectId = Guid.Parse("8c97398e-09d8-4823-a82d-343619758e81"),
                 Title = "Help for account activity.",
                 Description = "I need help with finding my login activity.",
-                ReleaseDate = DateTime.Parse("23-06-2023"),
+                ReleaseDate = DateTime.ParseExact("23-06-2023", "dd-MM-yyyy", CultureInfo.InvariantCulture),
                 State = Enums.Tickets.States.New,
                 Type = Enums.Tickets.Types.AssistanceRequest,
             };
@@ -53,7 +49,7 @@ namespace TicketingSystem.Entities.Data.Configuration
                 ProjectId = Guid.Parse("0c1b871b-4ed5-4299-aec4-d59054b07c54"),
                 Title = "A user-friendly request.",
                 Description = "It would be nice, when deleting any kind of data, a window to pop up for reassurance of my action.",
-                ReleaseDate = DateTime.Parse("23-11-2022"),
+                ReleaseDate = DateTime.ParseExact("23-11-2022", "dd-MM-yyyy", CultureInfo.InvariantCulture),
                 State = Enums.Tickets.States.New,
                 Type = Enums.Tickets.Types.FeatureRequest,
             };

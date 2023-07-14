@@ -226,11 +226,11 @@ namespace TicketingSystem.Entities.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TicketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PublishedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     State = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: false),
-                    Files = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    TicketId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Files = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -245,7 +245,8 @@ namespace TicketingSystem.Entities.Migrations
                         name: "FK_Messages_Tickets_TicketId",
                         column: x => x.TicketId,
                         principalTable: "Tickets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -263,8 +264,8 @@ namespace TicketingSystem.Entities.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "eb9068f3-c28e-4ef1-a278-4038e6721e87", "user2@gmail.com", false, "Georgi", false, "Georgiev", false, null, "USER2@GMAIL.COM", "USER2", null, null, false, null, false, "User2" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "dc423e7c-ff85-454d-baf2-531589ec21e5", "user@mail.com", false, "Ivan", false, "Ivanov", false, null, "USER@MAIL.COM", "USER", null, null, false, null, false, "User" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "d39209af-d10d-4c49-a87f-b28cb8c821a5", "user2@gmail.com", false, "Georgi", false, "Georgiev", false, null, "USER2@GMAIL.COM", "USER2", null, null, false, null, false, "User2" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "0d91328b-7c4d-4fe1-8b9a-279dca616447", "user@mail.com", false, "Ivan", false, "Ivanov", false, null, "USER@MAIL.COM", "USER", null, null, false, null, false, "User" }
                 });
 
             migrationBuilder.InsertData(

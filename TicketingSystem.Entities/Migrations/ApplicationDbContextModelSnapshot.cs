@@ -152,7 +152,7 @@ namespace TicketingSystem.Entities.Migrations
                     b.Property<int>("State")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TicketId")
+                    b.Property<Guid>("TicketId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -434,7 +434,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc423e7c-ff85-454d-baf2-531589ec21e5",
+                            ConcurrencyStamp = "0d91328b-7c4d-4fe1-8b9a-279dca616447",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -451,7 +451,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eb9068f3-c28e-4ef1-a278-4038e6721e87",
+                            ConcurrencyStamp = "d39209af-d10d-4c49-a87f-b28cb8c821a5",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",
@@ -525,11 +525,15 @@ namespace TicketingSystem.Entities.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TicketingSystem.Entities.Models.Ticket", null)
+                    b.HasOne("TicketingSystem.Entities.Models.Ticket", "Ticket")
                         .WithMany("Messages")
-                        .HasForeignKey("TicketId");
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
+
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("TicketingSystem.Entities.Models.RegisterRequest", b =>
