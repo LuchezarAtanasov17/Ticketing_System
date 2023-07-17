@@ -1,6 +1,4 @@
-﻿using TicketingSystem.Web.Models.Tickets;
-
-namespace TicketingSystem.Web.Models.Projects
+﻿namespace TicketingSystem.Web.Models.Projects
 {
     public class CreateProjectRequest
     {

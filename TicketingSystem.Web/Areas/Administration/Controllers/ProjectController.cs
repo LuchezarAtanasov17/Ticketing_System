@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using TicketingSystem.Entities.Data.Common;
-using TicketingSystem.Entities.Enums.Tickets;
 using TicketingSystem.Entities.Models;
 using TicketingSystem.Web.Models.Projects;
-using TicketingSystem.Web.Models.Tickets;
 
 namespace TicketingSystem.Web.Areas.Administration.Controllers
 {
