@@ -30,6 +30,7 @@ namespace TicketingSystem.Web.Controllers
                     Content = p.Content,
                     PublishedOn = p.PublishedOn,
                     State = p.State,
+                    TicketId = p.TicketId
                 })
                 .ToListAsync();
 

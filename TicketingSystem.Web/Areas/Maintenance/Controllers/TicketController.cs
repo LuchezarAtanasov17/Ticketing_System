@@ -60,6 +60,7 @@ namespace TicketingSystem.Web.Areas.Maintenance.Controllers
             var enitityUser = await _repo.GetByIdAsync<User>(entityProject.SenderId);
             var entityMessages = await _repo
                 .All<Message>()
+                .Where(x=>x.TicketId == id)
                 .Select(x => new MessageViewModel()
                 {
                     Id = x.Id,

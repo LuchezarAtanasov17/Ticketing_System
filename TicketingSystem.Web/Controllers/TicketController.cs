@@ -61,6 +61,7 @@ namespace TicketingSystem.Web.Controllers
             var enitityUser = await _repo.GetByIdAsync<User>(entityTicket.SenderId);
             var entityMessages = await _repo
                 .All<Message>()
+                .Where(x=>x.TicketId == id)
                 .Select(x => new MessageViewModel()
                 {
                     Id = x.Id,
@@ -69,6 +70,7 @@ namespace TicketingSystem.Web.Controllers
                     PublishedOn = x.PublishedOn,
                     State = x.State,
                     Files = x.Files,
+                    TicketId= entityTicket.Id,
                     Author = new UserViewModel()
                     {
                         Id= x.Author.Id,
