@@ -5,11 +5,13 @@ Ticketing System is a web application for managing tickets.
 
 ## Features
 
+- 3 different roles: Administrator, Support and User.
+- The first registered user will acquire Administrator privileges.
+- The administrator can change all user roles.
 - Users can register but cannot use their accounts until Administrator approves them.
 - Users can login in if account is already approved.
 - Listing, creating, updating and deleting projects and tickets.
 - Sending messages in scope of ticket.
-- 3 different roles: Administrator, Support and User.
 
 ## Base Requirements
 
