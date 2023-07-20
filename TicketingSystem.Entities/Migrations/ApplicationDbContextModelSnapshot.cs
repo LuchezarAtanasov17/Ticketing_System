@@ -106,6 +106,18 @@ namespace TicketingSystem.Entities.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
+                            RoleId = new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04")
+                        },
+                        new
+                        {
+                            UserId = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
+                            RoleId = new Guid("0378ef66-3332-4860-ad38-773ed8c0594a")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -256,7 +268,7 @@ namespace TicketingSystem.Entities.Migrations
                             Id = new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04"),
                             ConcurrencyStamp = "bdea90a1-4ea6-4db7-acc6-c5dd6a18bb07",
                             Name = "User",
-                            NormalizedName = "USER  "
+                            NormalizedName = "USER"
                         },
                         new
                         {
@@ -434,7 +446,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0dda18d-19a5-4d48-bfef-00886158927e",
+                            ConcurrencyStamp = "9cfe9432-f9bf-4f7b-9e4a-b354c46349ed",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -451,7 +463,7 @@ namespace TicketingSystem.Entities.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70336c51-d823-4f4c-9fcd-68b1df263f85",
+                            ConcurrencyStamp = "eddb0461-c869-454e-ad0f-3e8ccdfbc38d",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Georgi",

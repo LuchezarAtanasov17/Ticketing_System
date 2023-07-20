@@ -26,6 +26,7 @@ namespace TicketingSystem.Entities.Data
             builder.ApplyConfiguration(new ProjectConfiguration());
             builder.ApplyConfiguration(new TicketConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
 
             builder.Entity<Message>()
                 .HasOne(e => e.Ticket)

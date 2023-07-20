@@ -144,8 +144,9 @@ namespace TicketingSystem.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    // Two default users are already seeded, so the first real registered user will acquire Administrator privileges.
-                    if (_userManager.Users.Count() < 4)
+                    // Default users are already seeded but if there is no Administrator, first registered user becomes.
+                    var administrators = await _userManager.GetUsersInRoleAsync("Administrator");
+                    if (!administrators.Any())
                     {
                         await _userManager.AddToRoleAsync(user, "Administrator");
                     }

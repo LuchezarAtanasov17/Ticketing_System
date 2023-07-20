@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -254,7 +255,7 @@ namespace TicketingSystem.Entities.Migrations
                 {
                     { new Guid("0378ef66-3332-4860-ad38-773ed8c0594a"), "b832276f-ec40-4348-95c3-a49808529b84", "Maintenance", "MAINTENANCE" },
                     { new Guid("6c508509-7dd9-44c3-9597-8c14c65e661b"), "b6d65614-7c33-46b0-aecc-ebe78d0f9d7d", "Administrator", "ADMINISTRATOR" },
-                    { new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04"), "bdea90a1-4ea6-4db7-acc6-c5dd6a18bb07", "User", "USER  " }
+                    { new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04"), "bdea90a1-4ea6-4db7-acc6-c5dd6a18bb07", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,8 +263,8 @@ namespace TicketingSystem.Entities.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsApproved", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "70336c51-d823-4f4c-9fcd-68b1df263f85", "user2@gmail.com", false, "Georgi", false, "Georgiev", false, null, "USER2@GMAIL.COM", "USER2", null, null, false, null, false, "User2" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "b0dda18d-19a5-4d48-bfef-00886158927e", "user@mail.com", false, "Ivan", false, "Ivanov", false, null, "USER@MAIL.COM", "USER", null, null, false, null, false, "User" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "eddb0461-c869-454e-ad0f-3e8ccdfbc38d", "user2@gmail.com", false, "Georgi", false, "Georgiev", false, null, "USER2@GMAIL.COM", "USER2", null, null, false, null, false, "User2" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "9cfe9432-f9bf-4f7b-9e4a-b354c46349ed", "user@mail.com", false, "Ivan", false, "Ivanov", false, null, "USER@MAIL.COM", "USER", null, null, false, null, false, "User" }
                 });
 
             migrationBuilder.InsertData(
@@ -277,19 +278,23 @@ namespace TicketingSystem.Entities.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Tickets",
-                columns: new[] { "Id", "Description", "Files", "ProjectId", "ReleaseDate", "SenderId", "State", "Title", "Type" },
-                values: new object[] { new Guid("543ff3e3-5ac4-45ca-8cd4-f8d942548c7e"), "I need help with finding my login activity.", null, new Guid("8c97398e-09d8-4823-a82d-343619758e81"), new DateTime(2023, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 1, "Help for account activity.", 2 });
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("0378ef66-3332-4860-ad38-773ed8c0594a"), new Guid("1456c79b-7080-4586-8467-900a3cb033fe") },
+                    { new Guid("7062d4a3-203f-4375-aaef-4918dcfcef04"), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") }
+                });
 
             migrationBuilder.InsertData(
                 table: "Tickets",
                 columns: new[] { "Id", "Description", "Files", "ProjectId", "ReleaseDate", "SenderId", "State", "Title", "Type" },
-                values: new object[] { new Guid("ad90a67e-02be-4f9a-9fa8-74d5abcc2b4b"), "The app doesn't recognize my identity, when I try to log in.", null, new Guid("8c97398e-09d8-4823-a82d-343619758e81"), new DateTime(2022, 4, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "Login issue.", 0 });
-
-            migrationBuilder.InsertData(
-                table: "Tickets",
-                columns: new[] { "Id", "Description", "Files", "ProjectId", "ReleaseDate", "SenderId", "State", "Title", "Type" },
-                values: new object[] { new Guid("d385bf53-6e41-4ea3-8c7f-729c6893466f"), "It would be nice, when deleting any kind of data, a window to pop up for reassurance of my action.", null, new Guid("0c1b871b-4ed5-4299-aec4-d59054b07c54"), new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 1, "A user-friendly request.", 1 });
+                values: new object[,]
+                {
+                    { new Guid("543ff3e3-5ac4-45ca-8cd4-f8d942548c7e"), "I need help with finding my login activity.", null, new Guid("8c97398e-09d8-4823-a82d-343619758e81"), new DateTime(2023, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 1, "Help for account activity.", 2 },
+                    { new Guid("ad90a67e-02be-4f9a-9fa8-74d5abcc2b4b"), "The app doesn't recognize my identity, when I try to log in.", null, new Guid("8c97398e-09d8-4823-a82d-343619758e81"), new DateTime(2022, 4, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "Login issue.", 0 },
+                    { new Guid("d385bf53-6e41-4ea3-8c7f-729c6893466f"), "It would be nice, when deleting any kind of data, a window to pop up for reassurance of my action.", null, new Guid("0c1b871b-4ed5-4299-aec4-d59054b07c54"), new DateTime(2022, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 1, "A user-friendly request.", 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
